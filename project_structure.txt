@@ -1,0 +1,17 @@
+/backend
+├── agents/
+│   ├── support_agent.py
+│   ├── dashboard_agent.py
+├── tools/
+│   ├── mongodb_tool.py
+│   ├── external_api.py
+├── data/
+│   └── mock_data_loader.py
+├── schemas/
+│   └── sample_schemas.py
+├── api/
+│   └── handlers.py
+├── main.py
+└── README.md
+
+/frontend
