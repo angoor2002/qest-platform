@@ -1,25 +1,30 @@
-from flask import Flask, request, jsonify
-from flask_cors import CORS
-import asyncio
+# main.py
+
+from fastapi import FastAPI, Request, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from agentic_workflow import agentic_workflow
+from asyncio import to_thread
 
-app = Flask(__name__)
-CORS(app, origins=["http://localhost:3000"], methods=["POST"], supports_credentials=True)
+app = FastAPI()
 
-@app.route('/chat', methods=['POST'])
-def chat_handler():
-    data = request.get_json()
-    session_id = data.get('session_id')
-    message = data.get('message')
+# Enable CORS for your frontend (e.g., React at localhost:3000)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000"],
+    allow_credentials=True,
+    allow_methods=["POST"],
+    allow_headers=["*"],
+)
+
+@app.post("/chat")
+async def chat_handler(request: Request):
+    data = await request.json()
+    session_id = data.get("session_id")
+    message = data.get("message")
 
     if not session_id or not message:
-        return jsonify({"error": "Missing 'session_id' or 'message'"}), 400
+        raise HTTPException(status_code=400, detail="Missing 'session_id' or 'message'")
 
-    result = agentic_workflow(message, session_id)
-    if asyncio.iscoroutine(result):
-        result = asyncio.run(result)
-
-    return jsonify({"result": result})
-
-if __name__ == '__main__':
-    app.run(debug=True)
+    # Run the blocking agentic_workflow in a separate thread
+    result = await to_thread(agentic_workflow, message, session_id)
+    return {"result": result}
