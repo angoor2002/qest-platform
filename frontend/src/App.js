@@ -2,23 +2,15 @@ import React, { useState, useEffect, useRef } from 'react';
 import './index.css';
 
 function getSessionId() {
-  let sid = sessionStorage.getItem('sessionId');
-  if (!sid) {
-    sid = crypto.randomUUID(); // secure, RFC‑4122 v4 UUID :contentReference[oaicite:1]{index=1}
-    sessionStorage.setItem('sessionId', sid);
-  }
-  return sid;
+  // Always returns a new UUID on each call/page load
+  return crypto.randomUUID();
 }
 
 function App() {
   const [input, setInput] = useState('');
   const [chatLog, setChatLog] = useState([]);
   const [loading, setLoading] = useState(false);
-  const sessionId = useRef('');
-
-  useEffect(() => {
-    sessionId.current = getSessionId();
-  }, []);
+  const sessionId = useRef(getSessionId());
 
   const sendMessage = async (e) => {
     e.preventDefault();
