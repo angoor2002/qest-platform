@@ -5,13 +5,13 @@ It implements short term memory too for a particular chat which can easily be co
 
 For now, this system is capable of handling the following the questions the best:
 
-● "Which course has the highest enrollment?"(db querying)
-● "What is the attendance percentage for Pilates?"
-● "Who is the instructor for the above mentioned course?"( Handles short term memory for a particular session too)
-● "Create a new client with name Charles, email charles@gmail.com, phone number 7650289346.(create client tool)
-● "What can I expect on my first day?"(RAG component)
-● "How much payment did we get?"
-● "Can you retrieve all of the data for the different payments that we have got?"
+- "Which course has the highest enrollment?" (db querying)  
+- "What is the attendance percentage for Pilates?"  
+- "Who is the instructor for the above mentioned course?" (Handles short-term memory for a particular session too)  
+- "Create a new client with name Charles, email charles@gmail.com, phone number 7650289346." (create client tool)  
+- "What can I expect on my first day?" (RAG component)  
+- "How much payment did we get?"  
+- "Can you retrieve all of the data for the different payments that we have got?"  
 
 
 Please do keep in mind the db formed was a synthetic one and with the current date format used it is not quite able to answer only the question "how much revenue was generated in 2025/ this month?".
