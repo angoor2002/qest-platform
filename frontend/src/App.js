@@ -22,7 +22,7 @@ function App() {
 
     try {
       console.log(sessionId.current)
-      const res = await fetch('https://c858-14-97-202-30.ngrok-free.app/chat', {
+      const res = await fetch('https://6ca6e2352bd7.ngrok-free.app/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
